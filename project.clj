@@ -1,4 +1,4 @@
-(defproject ontology/lein-template "0.2.0-SNAPSHOT"
+(defproject ontology/lein-template "0.2.0"
   :description "A new template for new Ontology projects using Tawny-OWL."
   :url "http://github.com/phillord/tawny-template"
 
