@@ -13,17 +13,25 @@
   "Generate a new project using Tawny-OWL."
   [name]
   (let [
-        core-ns (multi-segment (sanitize-ns name))
-        main-ns (multi-segment (sanitize-ns name) name)
-        base-dir-path (name-to-path name)
-        onto-name
-        (last (clojure.string/split base-dir-path #"/"))
-        data {:name name
+        split-name (clojure.string/split name #"[.]")
+        base (if (= 1 (count split-name))
+               (first split-name)
+               (clojure.string/join "."
+                (butlast split-name)))
+        onto (if (= 1 (count split-name))
+               (first split-name)
+               (last split-name))
+        core-ns (str (multi-segment (sanitize-ns base)) ".core")
+        main-ns (str (multi-segment (sanitize-ns base)) "."  onto)
+        base-dir-path (name-to-path base)
+        data {:split-name split-name
+              :name name
               :namespace-main core-ns
               :namespace main-ns
               :sanitized base-dir-path
-              :onto-name onto-name
+              :onto-name onto
               }]
+    (println "data is" data)
     (main/info "Generating fresh 'lein new' ontology project.")
     (->files data
              ["project.clj" (render "project.clj" data)]
