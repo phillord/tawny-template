@@ -13,7 +13,7 @@
   "Generate a new project using Tawny-OWL."
   [name]
   (let [
-        split-name (clojure.string/split name #"[.]")
+        split-name (clojure.string/split name #"[.]|-")
         base (if (= 1 (count split-name))
                (first split-name)
                (clojure.string/join "."
@@ -31,7 +31,6 @@
               :sanitized base-dir-path
               :onto-name onto
               }]
-    (println "data is" data)
     (main/info "Generating fresh 'lein new' ontology project.")
     (->files data
              ["project.clj" (render "project.clj" data)]
