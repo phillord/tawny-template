@@ -1,5 +1,5 @@
 (ns {{namespace}}
-  (:use [tawny.owl]))
+  (:require [tawny.owl :refer :all]))
 
 
 (defontology {{name}}
