@@ -21,10 +21,11 @@
         onto (if (= 1 (count split-name))
                (first split-name)
                (last split-name))
-        core-ns (str (multi-segment (sanitize-ns base)) ".core")
-        main-ns (str (multi-segment (sanitize-ns base)) "."  onto)
+        core-ns (str (multi-segment (sanitize-ns base)))
+        main-ns (str (sanitize-ns base) "."  onto)
         base-dir-path (name-to-path base)
-        data {:split-name split-name
+        data {:base base
+              :split-name split-name
               :name name
               :namespace-main core-ns
               :namespace main-ns
